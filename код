@@ -1,0 +1,101 @@
+app.post("/", urlencodedParser, function (request, response) {
+    if(!request.body) return response.sendStatus(400);
+    console.log(request.body.login);
+    console.log(request.body.pasword);
+
+    const connection = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        database: "blog",
+        password: "root"
+    }).promise();
+    const sql = "INSERT INTO users(id,login,pasword,status) VALUES (?, ?,?,?)";
+    const user = [2,request.body.login,request.body.pasword,'user'];
+    connection.query(sql, user)
+        .then(result =>{
+            console.log(result[0]);
+        })
+        .catch(err =>{
+            console.log(err);
+        });
+});
+
+
+
+
+const http = require('http');
+const fs = require('fs');
+const httml = fs.readFileSync('main.html');
+const cssfile = fs.readFileSync('stile.css');
+const js1 = fs.readFileSync('kodik.js');
+const js2 = fs.readFileSync('jquery-3.6.1.min.js');
+const photo1 = fs.readFileSync('1.jpg');
+const photo2 = fs.readFileSync('fon.jpg');
+const httml2 = fs.readFileSync('History.html')
+http.createServer(async  (req,res) => {
+    switch(req.url)
+    {
+        case "/":
+            res.setHeader('Content-type', 'text/html');
+            res.end(httml);
+            break;
+        case "/stile.css":
+            res.setHeader('Content-type', 'text/css');
+            res.end(cssfile);
+            break;
+        case "/kodik.js":
+            res.setHeader('Content-type', 'text/JavaScript');
+            res.end(js1);
+            break;
+        case "/jquery-3.6.1.min.js":
+            res.setHeader('Content-type', 'text/JavaScript');
+            res.end(js2);
+            break;
+        case "/1.jpg":
+            res.setHeader('Content-type', 'image/jpeg');
+            res.end(photo1);
+            break;
+        case "/fon.jpg":
+            res.setHeader('Content-type', 'image/jpeg');
+            res.end(photo2);
+            break;
+        case "/History.html":
+            res.setHeader('Content-type', 'text/html');
+            res.end(httml2);
+            break;
+        case "/main.html":
+            res.setHeader('Content-type', 'text/html');
+            res.end(httml);
+            break;
+
+    }
+
+}).listen(3000);
+
+
+
+
+
+
+
+
+
+
+
+
+const mysql = require("mysql2");
+ const connection = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        database: "blog",
+        password: "root"
+    }).promise();
+    const sql = "INSERT INTO users(id,login,pasword,status) VALUES (?, ?,?,?)";
+    const user = [2,request.body.login,request.body.pasword,'user'];
+    connection.query(sql, user)
+        .then(result =>{
+            console.log(result[0]);
+        })
+        .catch(err =>{
+            console.log(err);
+        });

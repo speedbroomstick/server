@@ -1,0 +1,51 @@
+.mak
+{
+    font-size: 40px;
+}
+body
+{
+    background-image: url("fon.jpg");
+    background-size: cover;
+    color: #fff;
+    background-attachment: fixed;
+    background-repeat: repeat-x;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    float: right;
+}
+
+li a {
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    font-size: 30px;
+    font-family: "MS Gothic";
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+}
+.bloccc
+{
+    background-color: black;
+}
+.mainstr
+{
+    width: auto;
+    height: auto;
+    background-color: black;
+    position: absolute;
+    top: 150px;
+    left: 150px;
+    right: 150px;
+}
