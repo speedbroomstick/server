@@ -33,13 +33,34 @@ const fileFilter = (req, file, cb) => {
     }
 }
 app.use(multer({storage:storageConfig, fileFilter: fileFilter}).single("filedata"));
-app.post("/upload", function (req, res, next) {
+app.post("/History.html", function (req, res, next) {
     let filedata = req.file;
     console.log(filedata);
-    if(!filedata)
+   if(!filedata)
         res.send("Ошибка при загрузке файла");
-    else
-        res.send("Файл загружен");
+    else{
+    res.sendFile(__dirname + "/History.html");
+
+
+    async function run() {
+        try {
+            await mongoClient.connect();
+            const db = mongoClient.db("blog");
+            const collection = db.collection("blogs");
+            let blog = {photo:'photo' + col+'.jpg', text: req.body.TextBlog};
+           // const results = await collection.find({login: request.body.login, password: request.body.pasword}).toArray();
+           // console.log(results.keys('login'));
+            const result = await collection.insertOne(blog);
+
+        }catch(err) {
+            console.log(err);
+        } finally {
+            await mongoClient.close();
+        }
+    }
+    run();
+}
+
 });
 app.get("/", function (request, response) {
     response.sendFile(__dirname + "/main.html");

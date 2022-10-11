@@ -14,11 +14,12 @@
   <li><a class="bloccc" href="History.html">History</a></li>
   <li><a class="bloccc" href="main.html">Home</a></li>
 </ul>
-<div class="mainstr">
-    <input class="hollow button secondary" type="button" value="Добавить блог" onclick="f2()">
-    <input class="hollow button secondary" type="button" value="Посмотреть блоги" onclick="f1()">
-    <form class="blogik" action="/upload" method="post" enctype="multipart/form-data">
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">
+<div class="mainstr" id="div1">
+    <input class="hollow button secondary" type="button" value="Посмотреть блоги" onclick="f2()">
+    <input class="hollow button secondary" type="button" value="Добавить блог" onclick="f1()">
+    
+    <form class="blogik" action="/History.html" method="post" enctype="multipart/form-data">
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="TextBlog">
 
     </textarea>
         <br>
@@ -27,7 +28,6 @@
         </div>
         <input class="hollow button secondary" type="submit" value="Отправить">
     </form>
-
 </div>
 <script src="jquery-3.6.1.min.js"></script>
 <script src="kodik.js"></script>
