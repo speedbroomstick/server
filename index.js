@@ -52,8 +52,6 @@ app.post("/History.html", function (req, res, next) {
             const db = mongoClient.db("blog");
             const collection = db.collection("blogs");
             let blog = {photo:'photo' + col+'.jpg', text: req.body.TextBlog};
-           // const results = await collection.find({login: request.body.login, password: request.body.pasword}).toArray();
-           // console.log(results.keys('login'));
             const result = await collection.insertOne(blog);
 
         }catch(err) {
@@ -87,8 +85,28 @@ app.get("/1.jpg", function (request, response) {
 app.get("/fon.jpg", function (request, response) {
     response.sendFile(__dirname + "/fon.jpg");
 });
+let blogii;
 app.get("/History.html", function (request, response) {
+
+    async function run() {
+        try {
+            await mongoClient.connect();
+            const db = mongoClient.db("blog");
+            const collection = db.collection("blogs");
+            blogii = await collection.find().toArray();
+
+        }catch(err) {
+            console.log(err);
+        } finally {
+            await mongoClient.close();
+        }
+    }
+    run();
+
     response.sendFile(__dirname + "/History.html");
+});
+app.get("/main2.html", function (request, response) {
+    response.sendFile(__dirname + "/main2.html");
 });
 app.post("/main2.html", urlencodedParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);
@@ -122,3 +140,5 @@ app.post("/main2.html", urlencodedParser, function (request, response) {
 });
 
 app.listen(3000, ()=>console.log("Сервер запущен..."));
+
+module.exports.blogii;
