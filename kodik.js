@@ -1,14 +1,6 @@
-$('a').hover(function (){
-    $(this).fadeTo(1000,0.7);
-    },
-    function ()
-    {
-        $(this).fadeTo(1000,1);
-    });
-//$('img').width($('.mainstr').width() -700);
-//$('img').height($('.mainstr').height() -100);
+
 let flajok = false;
-$('.blogik').hide();
+
 function f1()
 {
     if(flajok === false)
@@ -24,7 +16,10 @@ function f1()
         flajok = false;
     }
 }
-function f2()
+function vxod()
 {
-
+    $('#b1').hide();
+    $('#b2').hide();
+    $('#b3').hide();
 }
+module.exports = vxod();

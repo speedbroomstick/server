@@ -5,6 +5,10 @@ const url = "mongodb://localhost:27017/";
 const mongoClient = new MongoClient(url, { useUnifiedTopology: true });
 const urlencodedParser = express.urlencoded({extended: false});
 const fs = require('fs');
+//const pokaz = require("./kodik.js");
+const jsdom = require('jsdom')
+const dom = new jsdom.JSDOM("")
+const jquery = require('jquery')(dom.window)
 let col;
 const dir = './picture';
 fs.readdir(dir, (err, files) => {
@@ -86,7 +90,7 @@ app.get("/fon.jpg", function (request, response) {
 app.get("/History.html", function (request, response) {
     response.sendFile(__dirname + "/History.html");
 });
-app.post("/", urlencodedParser, function (request, response) {
+app.post("/main2.html", urlencodedParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);
     async function run() {
         try {
@@ -98,11 +102,13 @@ app.post("/", urlencodedParser, function (request, response) {
            // console.log(results.keys('login'));
             if(results.length>0)
             {
-                alert("Вы успешно вошли");
+               // alert("Вы успешно вошли");
+               response.sendFile(__dirname + "/main2.html");
             }
             else
             {
-                const result = await collection.insertOne(user);alert("Регистрация успешна");
+                response.sendFile(__dirname + "/main2.html");
+                const result = await collection.insertOne(user);
             }
 
         }catch(err) {
