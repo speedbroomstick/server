@@ -1,4 +1,3 @@
-//blogii = require('./index.js');
 let flajok = false;
 let flajok2 = false;
 $(".blogik").hide();
@@ -31,8 +30,15 @@ else
     flajok2 = true;
 }
 }
-window.onload = function()
+//let TimeupdateDate = setInterval("updateDate()",2000); 
+window.onload = function updateDate()
 {
+//let fileContent = fs.readFileSync("blog.json", "utf8");
+//var blogs = JSON.parse(fileContent);
+//console.log(blogs);S
+
+let files = file.files[0];
+console.log(files);
 //let text = blogii.keys('text');
 //let photo = "./picture/" + blogii.keys('photo'); //./picture/photo0.jpg
 //$(".blogik2").prepend("<div class='card' style='width: 18rem;'><img id='cartinka1' src='' class='card-img-top'> <div class='card-body'><p class='card-text'></p></div></div>");

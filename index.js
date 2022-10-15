@@ -1,4 +1,5 @@
 const MongoClient = require("mongodb").MongoClient;
+const { Console } = require("console");
 const express = require("express");
 const app = express();
 const url = "mongodb://localhost:27017/";
@@ -37,6 +38,9 @@ const fileFilter = (req, file, cb) => {
     }
 }
 app.use(multer({storage:storageConfig, fileFilter: fileFilter}).single("filedata"));
+app.get("/History.html", function (request, response) {
+            response.sendFile(__dirname + "/History.html");
+});
 app.post("/History.html", function (req, res, next) {
     let filedata = req.file;
     console.log(filedata);
@@ -53,6 +57,7 @@ app.post("/History.html", function (req, res, next) {
             const collection = db.collection("blogs");
             let blog = {photo:'photo' + col+'.jpg', text: req.body.TextBlog};
             const result = await collection.insertOne(blog);
+            UpdateInformation();
 
         }catch(err) {
             console.log(err);
@@ -86,25 +91,7 @@ app.get("/fon.jpg", function (request, response) {
     response.sendFile(__dirname + "/fon.jpg");
 });
 let blogii;
-app.get("/History.html", function (request, response) {
 
-    async function run() {
-        try {
-            await mongoClient.connect();
-            const db = mongoClient.db("blog");
-            const collection = db.collection("blogs");
-            blogii = await collection.find().toArray();
-
-        }catch(err) {
-            console.log(err);
-        } finally {
-            await mongoClient.close();
-        }
-    }
-    run();
-
-    response.sendFile(__dirname + "/History.html");
-});
 app.get("/main2.html", function (request, response) {
     response.sendFile(__dirname + "/main2.html");
 });
@@ -141,4 +128,21 @@ app.post("/main2.html", urlencodedParser, function (request, response) {
 
 app.listen(3000, ()=>console.log("Сервер запущен..."));
 
-module.exports.blogii;
+async function UpdateInformation() {
+    try {
+        await mongoClient.connect();
+        const db = mongoClient.db("blog");
+        const collection = db.collection("blogs");
+        blogii = await collection.find().toArray();
+        fs.writeFile("blog.json", JSON.stringify(blogii),function(error){
+            if(error) throw error;
+        });
+        console.log("УРААААААААААААААААААААА");
+
+    }catch(err) {
+        console.log(err);
+    } finally {
+        await mongoClient.close();
+    }
+}
+UpdateInformation();
