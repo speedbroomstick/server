@@ -39,7 +39,7 @@ const fileFilter = (req, file, cb) => {
 }
 app.use(multer({storage:storageConfig, fileFilter: fileFilter}).single("filedata"));
 app.get("/History.html", function (request, response) {
-            response.sendFile(__dirname + "/History.html");
+            response.sendFile(__dirname + "/HTML_JS_CSS/History.html");
 });
 app.post("/History.html", function (req, res, next) {
     let filedata = req.file;
@@ -47,7 +47,7 @@ app.post("/History.html", function (req, res, next) {
    if(!filedata)
         res.send("Ошибка при загрузке файла");
     else{
-    res.sendFile(__dirname + "/History.html");
+    res.sendFile(__dirname + "/HTML_JS_CSS/History.html");
 
 
     async function run() {
@@ -67,33 +67,32 @@ app.post("/History.html", function (req, res, next) {
     }
     run();
 }
-
 });
 app.get("/", function (request, response) {
-    response.sendFile(__dirname + "/main.html");
+    response.sendFile(__dirname + "/HTML_JS_CSS/main.html");
 });
 app.get("/main.html", function (request, response) {
-    response.sendFile(__dirname + "/main.html");
+    response.sendFile(__dirname + "/HTML_JS_CSS/main.html");
 });
 app.get("/stile.css", function (request, response) {
-    response.sendFile(__dirname + "/stile.css");
+    response.sendFile(__dirname + "/HTML_JS_CSS/stile.css");
 });
 app.get("/kodik.js", function (request, response) {
-    response.sendFile(__dirname + "/kodik.js");
+    response.sendFile(__dirname + "/HTML_JS_CSS/kodik.js");
 });
 app.get("/jquery-3.6.1.min.js", function (request, response) {
-    response.sendFile(__dirname + "/jquery-3.6.1.min.js");
+    response.sendFile(__dirname + "/HTML_JS_CSS/jquery-3.6.1.min.js");
 });
 app.get("/1.jpg", function (request, response) {
     response.sendFile(__dirname + "/1.jpg");
 });
 app.get("/fon.jpg", function (request, response) {
-    response.sendFile(__dirname + "/fon.jpg");
+    response.sendFile(__dirname + "/HTML_JS_CSS/fon.jpg");
 });
 let blogii;
 
 app.get("/main2.html", function (request, response) {
-    response.sendFile(__dirname + "/main2.html");
+    response.sendFile(__dirname + "/HTML_JS_CSS/main2.html");
 });
 app.post("/main2.html", urlencodedParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);
@@ -108,11 +107,11 @@ app.post("/main2.html", urlencodedParser, function (request, response) {
             if(results.length>0)
             {
                // alert("Вы успешно вошли");
-               response.sendFile(__dirname + "/main2.html");
+               response.sendFile(__dirname + "/HTML_JS_CSS/main2.html");
             }
             else
             {
-                response.sendFile(__dirname + "/main2.html");
+                response.sendFile(__dirname + "/HTML_JS_CSS/main2.html");
                 const result = await collection.insertOne(user);
             }
 
@@ -134,7 +133,7 @@ async function UpdateInformation() {
         const db = mongoClient.db("blog");
         const collection = db.collection("blogs");
         blogii = await collection.find().toArray();
-        fs.writeFile("blog.json", JSON.stringify(blogii),function(error){
+        fs.writeFile("/HTML_JS_CSS/another_node/blog.json", JSON.stringify(blogii),function(error){
             if(error) throw error;
         });
         console.log("УРААААААААААААААААААААА");
